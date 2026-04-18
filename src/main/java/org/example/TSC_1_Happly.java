@@ -4,11 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TSC_1_Happly {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -41,12 +44,22 @@ public class TSC_1_Happly {
         WebElement comment = driver.findElement(By.id("Sales_Contact_Comments__c"));
         comment.sendKeys("abc");
 
-        WebElement checkBox = driver.findElement(By.id("LblmktoCheckbox_47709_0"));
-        checkBox.click();
+        // Dùng findElements để trả về một Danh sách (List)
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("//input[@id='mktoCheckbox_47709_0']"));
+
+// Kiểm tra nếu danh sách không rỗng (nghĩa là tìm thấy ít nhất 1 phần tử)
+        if (!checkBoxes.isEmpty()) {
+            checkBoxes.get(0).click();
+        }
+
 
         WebElement btn = driver.findElement(By.className("mktoButton"));
         btn.click();
-        //river.quit();
+
+        System.out.println("hehe");
+
+        Thread.sleep(100);
+        driver.quit(); // luôn chạy
 
     }
 }
