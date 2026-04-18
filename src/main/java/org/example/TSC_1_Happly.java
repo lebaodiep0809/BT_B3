@@ -56,7 +56,11 @@ public class TSC_1_Happly {
         WebElement btn = driver.findElement(By.className("mktoButton"));
         btn.click();
 
-        System.out.println("hehe");
+        if (driver.getPageSource().contains("This field is required")) {
+            System.out.println("FAIL");
+        } else {
+            System.out.println("PASS");
+        }
 
         Thread.sleep(100);
         driver.quit(); // luôn chạy
